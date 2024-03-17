@@ -1,0 +1,18 @@
+name: SonarQube Scan
+on: [push]
+jobs:
+  sonar-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+ 
+    - name: SonarQube Scan
+      env:
+        SONAR_HOST_URL: http://localhost:9000
+        SONAR_TOKEN: squ_e7ba420d987e11f45b400a7c4b9d1128d96a7cce
+      run: |
+        sonar-scanner -Dsonar.projectKey=test \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=$SONAR_HOST_URL \
+                      -Dsonar.login=$SONAR_TOKEN
